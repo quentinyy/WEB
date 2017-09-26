@@ -55,7 +55,7 @@
                                 <li><a href="contacts.html">联系我们</a></li>
                                 <li><a href="mailbox.html">信箱</li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">退出</a></li>
+                                <li><a href="login.jsp">退出</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">YUN+</div>
@@ -148,7 +148,7 @@
                             </ul>
                         </li>                        
                         <li>
-                            <a href="login.html">
+                            <a href="login.jsp">
                                 <i class="fa fa-sign-out"></i> 退出
                             </a>
                         </li>

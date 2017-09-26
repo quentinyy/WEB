@@ -21,7 +21,21 @@ public class UserService {
 		try {
 			row = userDao.regist(user);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row>0?true:false;
+	}
+	/**
+	 * 邮件激活
+	 * @param code
+	 * @return
+	 */
+	public boolean active(String code) {
+		UserDao userDao = new UserDao();
+		int row=0;
+		try {
+			row = userDao.active(code);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return row>0?true:false;

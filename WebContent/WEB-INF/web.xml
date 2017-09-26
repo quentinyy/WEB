@@ -19,4 +19,14 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Active</display-name>
+    <servlet-name>Active</servlet-name>
+    <servlet-class>cn.me.web.servlet.Active</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Active</servlet-name>
+    <url-pattern>/active</url-pattern>
+  </servlet-mapping>
 </web-app>
