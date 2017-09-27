@@ -33,6 +33,7 @@
     <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet">
     <!-- Yun+ UI css主文件 -->
     <link href="${pageContext.request.contextPath }/css/yuntheme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/css/validate.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
     <div class="middle-box text-center loginscreen animated fadeInDown">
@@ -42,19 +43,20 @@
             </div>
             <h3>欢迎注册为yuntheme.com会员</h3>
             <p>注册一个新帐号</p>
-            <form class="m-t" role="form" action="${pageContext.request.contextPath }/register" method="post">
+            <form id="form" class="m-t" role="form" action="${pageContext.request.contextPath }/register" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名" required="" name="username">
+                    <input type="text" class="form-control" placeholder="用户名"  name="username">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="邮箱" required="" name="email">
+                    <input type="email" class="form-control" placeholder="邮箱"  name="email">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="" name="password">
+                    <input type="password" class="form-control" placeholder="密码"  name="password">
                 </div>
                 <div class="form-group">
                     <div class="checkbox i-checks pull-left">
-                        <label class="no-padding"> <input type="checkbox"><i></i> 我已阅读并同意注册协议 </label>
+                        <label class="no-padding"> <input type="checkbox" name="checkbox"><i></i> 我已阅读并同意注册协议 </label>
+                        <label id="checkbox-error" class="error" for="checkbox" style="display: none">必须同意协议</label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">注册</button>
@@ -69,14 +71,48 @@
     <!-- 引入主要jQuery 等js框架 -->
     <script src="${pageContext.request.contextPath }/js/jquery-2.1.1.js"></script>
     <script src="${pageContext.request.contextPath }/js/bootstrap/3.3.4/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/plugins/validate/jquery.validate.min.js"></script>
     <!-- iCheck -->
     <script src="${pageContext.request.contextPath }/js/plugins/iCheck/icheck.min.js"></script>
     <script>
         $(document).ready(function(){
+
+            $('#form').validate({
+            	rules:{
+            		username:{
+            			required:true
+            		},
+            		password:{
+            			required:true
+            		},
+            		email:{
+            			required:true,
+            			email:true
+            		},
+            		checkbox:{
+            			required:true
+            		}
+            	},
+            	messages:{
+            		username:{
+            			required:"用户名不能为空"
+            		},
+            		password:{
+            			required:"密码不能为空"
+            		},
+            		email:{
+            			required:"邮箱不能为空",
+            			email:"邮箱格式不正确"
+            		},
+            		checkbox:{
+            			required:"必须同意协议"
+            		}
+            	}
+            });
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
-            });
+            }); 
         });
     </script>
 
