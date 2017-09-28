@@ -51,9 +51,9 @@
                                 <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">项目</a></li>                            	
-                                <li><a href="contacts.html">联系我们</a></li>
-                                <li><a href="mailbox.html">信箱</li>
+                                <li><a href="#">项目</a></li>                            	
+                                <li><a href="#">联系我们</a></li>
+                                <li><a href="#">信箱</li>
                                 <li class="divider"></li>
                                 <li><a href="login.jsp">退出</a></li>
                             </ul>
@@ -68,7 +68,7 @@
                         </a>
                         <ul class="nav nav-second-level">
                             <li class="active"><a href="index.html">主面板</a></li>
-                            <li><a href="dashboard_1.html">主面板示例一</a></li>
+                            <li><a href="#">主面板示例一</a></li>
                         </ul>
                     </li>                  
                 </ul>
@@ -200,13 +200,13 @@
             <div class="sidebar-container">
                 <ul class="nav nav-tabs navs-3">
                     <li class="active">
-                        <a data-toggle="tab" href="dashboard_2.html#tab-1"> 通知 </a>
+                        <a data-toggle="tab" href="#"> 通知 </a>
                     </li>
                     <li>
-                        <a data-toggle="tab" href="dashboard_2.html#tab-2"> 任务 </a>
+                        <a data-toggle="tab" href="#"> 任务 </a>
                     </li>
                     <li class="">
-                        <a data-toggle="tab" href="dashboard_2.html#tab-3"><i class="fa fa-gear"></i></a>
+                        <a data-toggle="tab" href="#"><i class="fa fa-gear"></i></a>
                     </li>
                 </ul>
 
