@@ -31,6 +31,8 @@
     <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet">
     <!-- Yun+ UI css主文件 -->
     <link href="${pageContext.request.contextPath }/css/yuntheme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/css/validate.css" rel="stylesheet">
+
 </head>
 <body class="gray-bg">
     <div class="middle-box text-center loginscreen animated fadeInDown">
@@ -39,12 +41,12 @@
                 <h1 class="logo-name">Yun+</h1>
             </div>
             <h3>欢迎使用Yun+ 主题UI</h3>
-            <form class="m-t" role="form" action="index.html">
+            <form id="form" class="m-t" role="form" action="index.html">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="用户名" required="">
+                    <input type="email" class="form-control" placeholder="用户名" name="username">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="">
+                    <input type="password" class="form-control" placeholder="密码" name="password">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
 
@@ -59,6 +61,30 @@
     <!-- 引入主要jQuery 等js框架 -->
     <script src="${pageContext.request.contextPath }/js/jquery-2.1.1.js"></script>
     <script src="${pageContext.request.contextPath }/js/bootstrap/3.3.4/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/plugins/validate/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('#form').validate({
+            	rules:{
+            		username:{
+            			required:true
+            		},
+            		password:{
+            			required:true
+            		}
+            	},
+            	messages:{
+            		username:{
+            			required:"用户名不能为空"
+            		},
+            		password:{
+            			required:"密码不能为空"
+            		}
+            	}
+            });
+        });
+    </script>
 
 </body>
 </html>

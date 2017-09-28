@@ -9,7 +9,6 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,14 +17,22 @@ import org.apache.commons.beanutils.BeanUtils;
 import cn.me.domain.User;
 import cn.me.service.UserService;
 import cn.me.utils.MailUtils;
-/**
- * 注册servlet
- * @author yq
- *
- */
-public class Register extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+public class UserServlet extends BaseServlet{
+	public void active(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		/**
+		 * 邮件激活
+		 */
+		String code = request.getParameter("code");
+		UserService userService = new UserService();
+		boolean isActiveSuceess = userService.active(code);
+		if(isActiveSuceess) {
+			request.setCharacterEncoding("utf-8");
+			response.getWriter().write("<h1>active sucess</h1>");
+		}
+	}
+	public void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//获取表单内容
 		Map<String, String[]> parameterMap = request.getParameterMap();
@@ -45,8 +52,8 @@ public class Register extends HttpServlet {
 		if(isRegisterSucess) {
 			try {
 				
-				MailUtils.sendMail(user.getEmail(), "这是一封激活邮件，点击链接激活<a href='"+request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+this.getServletContext().getContextPath()+"/active?code="+user.getCode()+"'>"
-						+request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+this.getServletContext().getContextPath()+"/active?code="+user.getCode()+"</a>");
+				MailUtils.sendMail(user.getEmail(), "这是一封激活邮件，点击链接激活<a href='"+request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+this.getServletContext().getContextPath()+"/user?method=active&code="+user.getCode()+"'>"
+						+request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+this.getServletContext().getContextPath()+"/user?method=active&code="+user.getCode()+"</a>");
 			} catch (AddressException e) {
 				e.printStackTrace();
 			} catch (MessagingException e) {
@@ -60,8 +67,4 @@ public class Register extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
 }

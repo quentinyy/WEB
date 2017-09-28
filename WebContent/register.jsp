@@ -43,7 +43,7 @@
             </div>
             <h3>欢迎注册为yuntheme.com会员</h3>
             <p>注册一个新帐号</p>
-            <form id="form" class="m-t" role="form" action="${pageContext.request.contextPath }/register" method="post">
+            <form id="form" class="m-t" role="form" action="${pageContext.request.contextPath }/user?method=register" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="用户名"  name="username">
                 </div>
