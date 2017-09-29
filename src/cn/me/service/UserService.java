@@ -40,5 +40,16 @@ public class UserService {
 		}
 		return row>0?true:false;
 	}
+	public boolean checkUser(String username) {
+		UserDao userDao = new  UserDao();
+		boolean rs=false;
+		try {
+			rs = userDao.checkUser(username);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
 
 }

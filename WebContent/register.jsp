@@ -45,7 +45,7 @@
             <p>注册一个新帐号</p>
             <form id="form" class="m-t" role="form" action="${pageContext.request.contextPath }/user?method=register" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名"  name="username">
+                    <input type="text" class="form-control" placeholder="用户名"  name="username" id="username">
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="邮箱"  name="email">
@@ -80,7 +80,17 @@
             $('#form').validate({
             	rules:{
             		username:{
-            			required:true
+            			required:true,
+                        remote: {
+                            url: "${pageContext.request.contextPath }/user?method=checkuser",     //后台处理程序
+                            type: "post",               //数据发送方式
+                            dataType: "json",           //接受数据格式   
+                            data: {                     //要传递的数据
+                                username: function() {
+                                    return $("#username").val();
+                                }
+                            }
+                        }
             		},
             		password:{
             			required:true
@@ -95,7 +105,8 @@
             	},
             	messages:{
             		username:{
-            			required:"用户名不能为空"
+            			required:"用户名不能为空",
+                        remote:"用户名已存在"
             		},
             		password:{
             			required:"密码不能为空"

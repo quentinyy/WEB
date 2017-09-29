@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.sun.org.apache.bcel.internal.classfile.PMGClass;
+
 import cn.me.domain.User;
 import cn.me.service.UserService;
 import cn.me.utils.MailUtils;
@@ -30,6 +32,21 @@ public class UserServlet extends BaseServlet{
 		if(isActiveSuceess) {
 			request.setCharacterEncoding("utf-8");
 			response.getWriter().write("<h1>active sucess</h1>");
+		}
+	}
+	public void checkuser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		/**
+		 * 检查用户是否存在
+		 */
+		String username = request.getParameter("username");
+		UserService userService = new UserService();
+		//查询到存在rs为true
+		boolean rs = userService.checkUser(username);
+		if(rs) {
+			response.getWriter().write("false");
+		}else {
+			response.getWriter().write("true");
 		}
 	}
 	public void register(HttpServletRequest request, HttpServletResponse response)

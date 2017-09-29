@@ -46,6 +46,9 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
+                            <li>
+                                <a aria-expanded="false" role="button" href="layouts.html"> 返回布局</a>
+                            </li>
                             <li class="dropdown">
                                 <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 菜单　选项 <span class="caret"></span></a>
                                 <ul role="menu" class="dropdown-menu">
@@ -67,7 +70,7 @@
             </div><!-- 顶部导航栏　结束 -->
             <!-- 主内容　开始 -->
  			<div class="wrapper wrapper-content animated fadeInRight">
-                <div class="row">
+                <div class="row">                	
                     <div class="col-md-3">
                         <div class="ibox">
                             <div class="ibox-content product-box">
@@ -95,6 +98,196 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="ibox">
+                            <div class="ibox-content product-box">
+
+                                <div class="product-imitation">
+                                    [ 商品信息 ]
+                                </div>
+                                <div class="product-desc">
+                                    <span class="product-price">
+                                        ￥10
+                                    </span>
+                                    <small class="text-muted">分类</small>
+                                    <a href="ecommerce_products_grid.html#" class="product-name"> 商品</a>
+
+
+
+                                    <div class="small m-t-xs">
+                                        Yun+是一个完全响应式的后台主题UI框架，基于Boostrap CSS框架，jQuery框架等
+                                    </div>
+                                    <div class="m-t text-righ">
+
+                                        <a href="ecommerce_products_grid.html#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="footer">

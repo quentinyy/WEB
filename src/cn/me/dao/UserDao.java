@@ -3,6 +3,7 @@ package cn.me.dao;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import cn.me.domain.User;
 import cn.me.utils.DataSourceUtils;
@@ -33,6 +34,11 @@ public class UserDao {
 		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
 		int row = queryRunner.update("update user set state=? where code=?",1,code);
 		return row;
+	}
+	public boolean checkUser(String username) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		User user = queryRunner.query("select * from user where username=?",new BeanHandler<User>(User.class),username);
+		return user!=null?true:false;
 	}
 
 
