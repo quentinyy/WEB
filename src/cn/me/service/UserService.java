@@ -1,6 +1,7 @@
 package cn.me.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cn.me.dao.UserDao;
 import cn.me.domain.User;
@@ -50,6 +51,28 @@ public class UserService {
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	public User login(String username, String password) {
+		UserDao userDao = new  UserDao();
+		User user = null;
+		try {
+			user = userDao.login(username,password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
+	public List<User> allUser() {
+		UserDao userDao = new  UserDao();
+		List<User> userlist = null;
+		try {
+			userlist = userDao.allUser();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userlist;
 	}
 
 }

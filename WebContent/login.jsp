@@ -41,9 +41,9 @@
                 <h1 class="logo-name">Yun+</h1>
             </div>
             <h3>欢迎使用Yun+ 主题UI</h3>
-            <form id="form" class="m-t" role="form" action="index.html">
+            <form id="form" class="m-t" role="form" action="${pageContext.request.contextPath }/user?method=login" method="post">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="用户名" name="username">
+                    <input type="text" class="form-control" placeholder="用户名" name="username">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="密码" name="password">

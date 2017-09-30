@@ -1,9 +1,11 @@
 package cn.me.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.me.domain.User;
 import cn.me.utils.DataSourceUtils;
@@ -39,6 +41,18 @@ public class UserDao {
 		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
 		User user = queryRunner.query("select * from user where username=?",new BeanHandler<User>(User.class),username);
 		return user!=null?true:false;
+	}
+	public User login(String username, String password) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		User user = null; 
+		user = queryRunner.query("select * from user where username=? and password=?",new BeanHandler<User>(User.class),username,password);
+		return user;
+	}
+	public List<User> allUser() throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		List<User> userlist = null; 
+		userlist = queryRunner.query("select * from user",new BeanListHandler<User>(User.class));
+		return userlist;
 	}
 
 

@@ -17,4 +17,12 @@
   	<servlet-name>UserServlet</servlet-name>
   	<url-pattern>/user</url-pattern>
   </servlet-mapping>
+  <filter>
+  	<filter-name>CheckUser</filter-name>
+  	<filter-class>cn.me.web.filter.CheckUser</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CheckUser</filter-name>
+  	<url-pattern>/admin.jsp</url-pattern>
+  </filter-mapping>
 </web-app>
