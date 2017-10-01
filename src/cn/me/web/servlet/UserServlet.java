@@ -2,6 +2,7 @@ package cn.me.web.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.org.apache.bcel.internal.classfile.PMGClass;
+import com.sun.org.apache.bcel.internal.generic.GOTO;
 
 import cn.me.domain.User;
 import cn.me.service.UserService;
+import cn.me.utils.JedisPoolUtils;
 import cn.me.utils.MailUtils;
+import redis.clients.jedis.Jedis;
 
 public class UserServlet extends BaseServlet{
 	public void active(HttpServletRequest request, HttpServletResponse response)
@@ -78,9 +84,25 @@ public class UserServlet extends BaseServlet{
 		/**
 		 * 
 		 */
-		UserService userService = new UserService();
-		List<User> userlist = userService.allUser();
 		HttpSession session = request.getSession();
+		UserService userService = new UserService();
+		List<User> userlist =null;
+		Gson gson = new Gson();
+		try {
+			Jedis jedis = JedisPoolUtils.getJedis();
+			String users = jedis.get("userlist");
+			if(users==null) {
+				System.out.println("set data to jedis");
+				userlist = userService.allUser();
+				jedis.set("userlist", gson.toJson(userlist));
+			}else {
+				System.out.println("get data from jedis");
+				userlist = gson.fromJson(users, new TypeToken<List<User>>() {}.getType());	
+			}
+		} catch (Exception e) {
+			System.out.println("connect jedis failed!");
+			userlist = userService.allUser();
+		}
 		session.setAttribute("userlist", userlist);
 		response.sendRedirect(this.getServletContext().getContextPath()+"/admin.jsp");
 	}
