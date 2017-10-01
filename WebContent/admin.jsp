@@ -156,7 +156,7 @@
                                                     <td>${user.username }</td>
                                                     <td>${user.password }</td>
                                                     <td>${user.email }</td>
-                                                    <c:if test="${user.state==1 }"><td  class="success">已激活</td></c:if><c:if test="${user.state==0 }"><td class="warning">未激活</td></c:if>
+                                                    <td><c:if test="${user.state==1 }"><span  class="label label-success">已激活</span></c:if><c:if test="${user.state==0 }"><span class="label label-warning">未激活</span></c:if></td>
                                                     <td>${user.code }</td>
                                                 </tr>    
                                                 </c:forEach>
