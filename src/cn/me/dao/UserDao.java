@@ -1,11 +1,16 @@
 package cn.me.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+
+import com.sun.xml.internal.bind.v2.runtime.MarshallerImpl;
 
 import cn.me.domain.User;
 import cn.me.utils.DataSourceUtils;
@@ -54,7 +59,17 @@ public class UserDao {
 		userlist = queryRunner.query("select * from user",new BeanListHandler<User>(User.class));
 		return userlist;
 	}
-
-
+	public List<User> getUserLimit(int currentPage, int pageSize) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		List<User> userlist = null; 
+		userlist = queryRunner.query("select * from user limit ?,?",new BeanListHandler<User>(User.class),(currentPage-1)*pageSize,pageSize);
+		return userlist;
+	}
+	public int getCountPage(int pageSize) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource()); 
+		int countUser = (int)(long) queryRunner.query("select count(*) from user",new ScalarHandler());
+		int countPage = (int) Math.ceil(countUser*1.0/pageSize);
+		return countPage;
+	}
 
 }

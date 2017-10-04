@@ -35,24 +35,6 @@
     <link href="${pageContext.request.contextPath }/css/yuntheme.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath }/js/jquery-2.1.1.js"></script>
 </head>
-<script>
-	$.ajax({
-			url: '${pageContext.request.contextPath}/user?method=allUser',
-			async:false,
-			type: 'POST',
-			dataType: 'json'
-		})
-		.done(function() {
-			console.log("success");
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
-
-</script>
 <body>
     <div id="wrapper">
         <!-- 侧边导航菜单 开始 -->
@@ -150,7 +132,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${userlist }" var="user">
+                                                <c:forEach items="${pageBean.objList }" var="user">
                                                 <tr>
                                                     <td>${user.uid }</td>
                                                     <td>${user.username }</td>
@@ -166,6 +148,44 @@
                                         </table>
                                     </div>
 
+                                </div>
+                                <div class="pagination">
+									<nav aria-label="Page navigation example">
+									  <ul class="pagination">
+									  	<c:if test="${pageBean.currentPage==1 }">
+										<li class="page-item disabled">
+									        <a class="page-link" href="#" aria-label="Previous">
+									    </c:if>
+										<c:if test="${pageBean.currentPage!=1 }">
+										<li class="page-item">
+									        <a class="page-link" href="${pageContext.request.contextPath }/user?method=userPage&currentPage=${pageBean.currentPage-1}" aria-label="Previous">
+									    </c:if>
+									        <span aria-hidden="true">&laquo;</span>
+									        <span class="sr-only">Previous</span>
+									      </a>
+									    </li>
+									    <c:forEach begin="1" end="${pageBean.countPage}" var="i">
+									    	<c:if test="${pageBean.currentPage==i }">
+									    		<li class="page-item active"><a class="page-link" href="javascript:void(0)">${i }</a></li>
+									    	</c:if>
+									 		<c:if test="${pageBean.currentPage!=i }">
+									    		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/user?method=userPage&currentPage=${i}">${i }</a></li>
+									    	</c:if>
+									    </c:forEach>
+									    <c:if test="${pageBean.currentPage==pageBean.countPage }">
+										<li class="page-item disabled">
+									        <a class="page-link" href="#" aria-label="Next">
+									    </c:if>
+										<c:if test="${pageBean.currentPage!=pageBean.countPage }">
+										<li class="page-item">
+									        <a class="page-link" href="${pageContext.request.contextPath }/user?method=userPage&currentPage=${pageBean.currentPage+1}" aria-label="Next">
+									    </c:if>
+									        <span aria-hidden="true">&raquo;</span>
+									        <span class="sr-only">Next</span>
+									      </a>
+									    </li>
+									  </ul>
+									</nav>
                                 </div>
                             </div>
                         </div>

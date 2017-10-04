@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.security.GeneralSecurityException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -22,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sun.org.apache.bcel.internal.classfile.PMGClass;
 import com.sun.org.apache.bcel.internal.generic.GOTO;
 
+import cn.me.domain.PageBean;
 import cn.me.domain.User;
 import cn.me.service.UserService;
 import cn.me.utils.JedisPoolUtils;
@@ -68,7 +71,7 @@ public class UserServlet extends BaseServlet{
 		User user = userService.login(username,password);
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
-		response.sendRedirect(this.getServletContext().getContextPath()+"/user?method=allUser");
+		response.sendRedirect(this.getServletContext().getContextPath()+"/user?method=userPage");
 	}
 	public void signout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -78,6 +81,19 @@ public class UserServlet extends BaseServlet{
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
 		response.sendRedirect(this.getServletContext().getContextPath()+"/login.jsp");
+	}
+	public void userPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String currentPageStr = request.getParameter("currentPage");
+		if(currentPageStr==null)currentPageStr="1";
+		String pageSizeStr = "7";
+		int currentPage = Integer.parseInt(currentPageStr);
+		int pageSize = Integer.parseInt(pageSizeStr);
+		UserService userService = new UserService();
+		PageBean<User> pageBean = userService.makePageBean(currentPage,pageSize);
+		HttpSession session = request.getSession();
+		session.setAttribute("pageBean", pageBean);
+		response.sendRedirect(this.getServletContext().getContextPath()+"/admin.jsp");
 	}
 	public void allUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -92,20 +108,21 @@ public class UserServlet extends BaseServlet{
 			Jedis jedis = JedisPoolUtils.getJedis();
 			String users = jedis.get("userlist");
 			if(users==null) {
-				System.out.println("set data to jedis");
+				System.out.println("set data to jedis "+new Date());
 				userlist = userService.allUser();
 				jedis.set("userlist", gson.toJson(userlist));
 			}else {
-				System.out.println("get data from jedis");
+				System.out.println("get data from jedis "+new Date());
 				userlist = gson.fromJson(users, new TypeToken<List<User>>() {}.getType());	
 			}
 		} catch (Exception e) {
-			System.out.println("connect jedis failed!");
+			System.out.println("connect jedis failed! "+new Date());
 			userlist = userService.allUser();
 		}
 		session.setAttribute("userlist", userlist);
 		response.sendRedirect(this.getServletContext().getContextPath()+"/admin.jsp");
 	}
+	
 	public void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//获取表单内容

@@ -1,9 +1,11 @@
 package cn.me.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import cn.me.dao.UserDao;
+import cn.me.domain.PageBean;
 import cn.me.domain.User;
 /**
  * 用户service
@@ -73,6 +75,24 @@ public class UserService {
 			e.printStackTrace();
 		}
 		return userlist;
+	}
+	public PageBean<User> makePageBean(int currentPage, int pageSize) {
+		UserDao userDao = new  UserDao();
+		PageBean<User> pageBean = new PageBean<User>();
+		pageBean.setCurrentPage(currentPage);
+		pageBean.setPageSize(pageSize);
+		List<User> userlist = null;
+		int countPage=0;
+		try {
+			userlist = userDao.getUserLimit(currentPage,pageSize);
+			countPage = userDao.getCountPage(pageSize);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pageBean.setObjList(userlist);
+		pageBean.setCountPage(countPage);
+		return pageBean;
 	}
 
 }
