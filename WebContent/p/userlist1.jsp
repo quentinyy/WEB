@@ -27,10 +27,8 @@
     <!-- 引入Bootstrap CSS框架 awesome字体-->
     <link href="${pageContext.request.contextPath }/css/bootstrap/3.3.4/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath }/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath }/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath }/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/css/plugins/footable/footable.bootstrap.css" rel="stylesheet">
     <!-- CSS动画框架 -->
     <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet">
     <!-- Yun+ UI css主文件 -->
@@ -121,27 +119,8 @@
 
                                      <div class="table-responsive">
 
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th data-toggle="true">UID</th>
-                                                    <th>USERNAME</th>
-                                                    <th>PASSWORD</th>
-                                                    <th>EMAIL</th>
-                                                    <th>STATE</th>
-                                                    <th>CODE</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-									            <tr>
-									               <th data-toggle="true">UID</th>
-	                                               <th>USERNAME</th>
-	                                               <th>PASSWORD</th>
-	                                               <th>EMAIL</th>
-	                                               <th>STATE</th>
-	                                               <th>CODE</th>
-									            </tr>
-								        </tfoot>
+                                        <table class="table table-striped" data-paging="true">
+
                                         </table>
                                     </div>
 
@@ -170,10 +149,7 @@
     <script src="${pageContext.request.contextPath }/js/bootstrap/3.3.4/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${pageContext.request.contextPath }/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/plugins/dataTables/jquery.dataTables.js"></script>
-	<script src="${pageContext.request.contextPath }/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-	<script src="${pageContext.request.contextPath }/js/plugins/dataTables/dataTables.responsive.js"></script>
-	<script src="${pageContext.request.contextPath }/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/plugins/footable/footable.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="${pageContext.request.contextPath }/js/inspinia.js"></script>
     <script src="${pageContext.request.contextPath }/js/plugins/pace/pace.min.js"></script>
@@ -182,20 +158,19 @@
     <script src="${pageContext.request.contextPath }/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
     
     <script>
-    $(document).ready(function() {
-        $('.table').DataTable( {
-        	  "ajax": "${pageContext.request.contextPath }/user?method=allUser",
-        	  "columns": [
-        	    { "data": "uid" },
-        	    { "data": "username" },
-        	    { "data": "password" },
-        	    { "data": "email" },
-        	    { "data": "state" },
-        	    { "data": "code" },
-        	  ]
-        } );
-    } );
-    	
+    	$(document).ready(function(){
+    		$('.table').footable({
+    			"columns": [
+    				{ "name": "uid","title":"ID"},
+    				{ "name": "username","title":"USERNAME"},
+    				{ "name": "password","title":"PASSWORD"},
+    				{ "name": "email","title":"EMAIL"},
+    				{ "name": "state","title":"STATE"},
+    				{ "name": "code","title":"NAME"}
+    			],
+    			"rows": $.get('${pageContext.request.contextPath }/user?method=allUser')
+    		});
+    	});
     </script>
 </body>
 </html>

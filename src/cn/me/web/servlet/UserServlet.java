@@ -106,27 +106,27 @@ public class UserServlet extends BaseServlet{
 		UserService userService = new UserService();
 		List<User> userlist =null;
 		Gson gson = new Gson();
+		
 		try {
 			Jedis jedis = JedisPoolUtils.getJedis();
-			String map = jedis.get("map");
-			if(map==null) {
-				System.out.println("set data to jedis "+new Date());
-				HashMap<String, Object> hashMap = new HashMap<>();
+			String users = jedis.get("userlist");
+			if(users==null) {
 				userlist = userService.allUser();
-				hashMap.put("data", userlist);
-				String json = gson.toJson(hashMap);
-				jedis.set("map", json);
+				String json = gson.toJson(userlist);
+				jedis.set("userlist", json);
+				response.setContentType("application/json");
 				response.getWriter().write(json);
 			}else {
-				System.out.println("get data from jedis "+new Date());
-				response.getWriter().write(map);
+				response.setContentType("application/json");
+				response.getWriter().write(users);
+				userlist = userService.allUser();
+				String json = gson.toJson(userlist);
+				jedis.set("userlist", json);
 			}
 		} catch (Exception e) {
-			System.out.println("connect jedis failed! "+new Date());
 			userlist = userService.allUser();
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("data", userlist);
-			String json = gson.toJson(map);
+			String json = gson.toJson(userlist);
+			response.setContentType("application/json");
 			response.getWriter().write(json);
 		}
 		
