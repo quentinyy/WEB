@@ -7,6 +7,13 @@ public class PageBean<T> {
 	private int currentPage;
 	private int pageSize;
 	private int countPage;
+	private int countObj;
+	public int getCountObj() {
+		return countObj;
+	}
+	public void setCountObj(int countObj) {
+		this.countObj = countObj;
+	}
 	private List<T> objList = new ArrayList<T>();
 	public int getCurrentPage() {
 		return currentPage;

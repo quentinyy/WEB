@@ -83,15 +83,18 @@ public class UserService {
 		pageBean.setPageSize(pageSize);
 		List<User> userlist = null;
 		int countPage=0;
+		int countUser=0;
 		try {
 			userlist = userDao.getUserLimit(currentPage,pageSize);
-			countPage = userDao.getCountPage(pageSize);
+			countUser = userDao.getCountUser();
+			countPage = (int) Math.ceil(countUser*1.0/pageSize);
+			pageBean.setCountObj(countUser);
+			pageBean.setObjList(userlist);
+			pageBean.setCountPage(countPage);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pageBean.setObjList(userlist);
-		pageBean.setCountPage(countPage);
 		return pageBean;
 	}
 

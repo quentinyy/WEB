@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.sun.org.apache.bcel.internal.classfile.PMGClass;
 import com.sun.org.apache.bcel.internal.generic.GOTO;
@@ -80,6 +81,7 @@ public class UserServlet extends BaseServlet{
 		 */
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
+		session.removeAttribute("pageBean");
 		response.sendRedirect(this.getServletContext().getContextPath()+"/login.jsp");
 	}
 	public void userPage(HttpServletRequest request, HttpServletResponse response)
@@ -93,7 +95,7 @@ public class UserServlet extends BaseServlet{
 		PageBean<User> pageBean = userService.makePageBean(currentPage,pageSize);
 		HttpSession session = request.getSession();
 		session.setAttribute("pageBean", pageBean);
-		response.sendRedirect(this.getServletContext().getContextPath()+"/admin.jsp");
+		response.sendRedirect(this.getServletContext().getContextPath()+"/p/userlist.jsp");
 	}
 	public void allUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -106,21 +108,28 @@ public class UserServlet extends BaseServlet{
 		Gson gson = new Gson();
 		try {
 			Jedis jedis = JedisPoolUtils.getJedis();
-			String users = jedis.get("userlist");
-			if(users==null) {
+			String map = jedis.get("map");
+			if(map==null) {
 				System.out.println("set data to jedis "+new Date());
+				HashMap<String, Object> hashMap = new HashMap<>();
 				userlist = userService.allUser();
-				jedis.set("userlist", gson.toJson(userlist));
+				hashMap.put("data", userlist);
+				String json = gson.toJson(hashMap);
+				jedis.set("map", json);
+				response.getWriter().write(json);
 			}else {
 				System.out.println("get data from jedis "+new Date());
-				userlist = gson.fromJson(users, new TypeToken<List<User>>() {}.getType());	
+				response.getWriter().write(map);
 			}
 		} catch (Exception e) {
 			System.out.println("connect jedis failed! "+new Date());
 			userlist = userService.allUser();
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("data", userlist);
+			String json = gson.toJson(map);
+			response.getWriter().write(json);
 		}
-		session.setAttribute("userlist", userlist);
-		response.sendRedirect(this.getServletContext().getContextPath()+"/admin.jsp");
+		
 	}
 	
 	public void register(HttpServletRequest request, HttpServletResponse response)

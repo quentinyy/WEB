@@ -43,7 +43,7 @@
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <span><img class="img-circle" src="img/profile_small.jpg" alt="image"></span>
+                            <span><img class="img-circle" src="${pageContext.request.contextPath }/img/profile_small.jpg" alt="image"></span>
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                                 <span class="clear">
                                     <span class="block m-t-xs">

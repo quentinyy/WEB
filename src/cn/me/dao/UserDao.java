@@ -65,11 +65,10 @@ public class UserDao {
 		userlist = queryRunner.query("select * from user limit ?,?",new BeanListHandler<User>(User.class),(currentPage-1)*pageSize,pageSize);
 		return userlist;
 	}
-	public int getCountPage(int pageSize) throws SQLException {
+	public int getCountUser() throws SQLException {
 		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource()); 
 		int countUser = (int)(long) queryRunner.query("select count(*) from user",new ScalarHandler());
-		int countPage = (int) Math.ceil(countUser*1.0/pageSize);
-		return countPage;
+		return countUser;
 	}
 
 }
