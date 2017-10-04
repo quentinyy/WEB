@@ -119,7 +119,7 @@
 
                                      <div class="table-responsive">
 
-                                        <table class="table table-striped" data-paging="true">
+                                        <table class="table table-striped" data-paging="true" data-sorting="true" data-state="true" data-filtering="true">
 
                                         </table>
                                     </div>

@@ -119,9 +119,6 @@ public class UserServlet extends BaseServlet{
 			}else {
 				response.setContentType("application/json");
 				response.getWriter().write(users);
-				userlist = userService.allUser();
-				String json = gson.toJson(userlist);
-				jedis.set("userlist", json);
 			}
 		} catch (Exception e) {
 			userlist = userService.allUser();
