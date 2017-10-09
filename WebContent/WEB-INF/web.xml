@@ -29,8 +29,8 @@
   	<filter-name>CheckUser</filter-name>
   	<filter-class>cn.me.web.filter.CheckUser</filter-class>
   </filter>
-  <!-- <filter-mapping>
+  <filter-mapping>
   	<filter-name>CheckUser</filter-name>
   	<url-pattern>/p/*</url-pattern>
-  </filter-mapping>  -->
+  </filter-mapping>
 </web-app>
