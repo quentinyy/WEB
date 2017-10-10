@@ -28,19 +28,22 @@ import com.sun.org.apache.bcel.internal.generic.GOTO;
 import cn.me.domain.PageBean;
 import cn.me.domain.User;
 import cn.me.service.UserService;
+import cn.me.service.impl.UserServiceImpl;
 import cn.me.utils.JedisPoolUtils;
 import cn.me.utils.MailUtils;
 import redis.clients.jedis.Jedis;
 
 public class UserServlet extends BaseServlet{
+	private UserService userService = new UserServiceImpl();
+
 	public void active(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/**
 		 * 邮件激活
 		 */
 		String code = request.getParameter("code");
-		UserService userService = new UserService();
-		boolean isActiveSuceess = userService.active(code);
+
+		boolean isActiveSuceess = userService .active(code);
 		if(isActiveSuceess) {
 			request.setCharacterEncoding("utf-8");
 			response.getWriter().write("<h1>active sucess</h1>");
@@ -52,7 +55,6 @@ public class UserServlet extends BaseServlet{
 		 * 检查用户是否存在
 		 */
 		String username = request.getParameter("username");
-		UserService userService = new UserService();
 		//查询到存在rs为true
 		boolean rs = userService.checkUser(username);
 		if(rs) {
@@ -68,7 +70,6 @@ public class UserServlet extends BaseServlet{
 		 */
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		UserService userService = new UserService();
 		User user = userService.login(username,password);
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
@@ -91,7 +92,6 @@ public class UserServlet extends BaseServlet{
 		String pageSizeStr = "7";
 		int currentPage = Integer.parseInt(currentPageStr);
 		int pageSize = Integer.parseInt(pageSizeStr);
-		UserService userService = new UserService();
 		PageBean<User> pageBean = userService.makePageBean(currentPage,pageSize);
 		HttpSession session = request.getSession();
 		session.setAttribute("pageBean", pageBean);
@@ -103,7 +103,6 @@ public class UserServlet extends BaseServlet{
 		 * 
 		 */
 		HttpSession session = request.getSession();
-		UserService userService = new UserService();
 		List<User> userlist =null;
 		Gson gson = new Gson();
 		
@@ -144,7 +143,6 @@ public class UserServlet extends BaseServlet{
 		user.setUid(UUID.randomUUID().toString());
 		user.setCode(UUID.randomUUID().toString());
 		//调用注册
-		UserService userService = new UserService();
 		boolean isRegisterSucess = userService.regist(user);
 		if(isRegisterSucess) {
 			try {
