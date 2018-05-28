@@ -35,7 +35,7 @@ public class MailUtils {
 		// 创建验证器
 		Authenticator auth = new Authenticator() {
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("active@yq1213.cn", "ukjovsyhzdtkjhib");
+				return new PasswordAuthentication("active@yq1213.cn", "--------");
 			}
 		};
 
